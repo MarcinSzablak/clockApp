@@ -2,11 +2,11 @@ import React,{ useState, useEffect } from 'react';
 import { Text } from 'react-native';
 
 const Clock = (props) =>{
-    const [clock, setClock] = useState(new Date().toLocaleTimeString('pl-PL', props.options));
+    const [clock, setClock] = useState(new Date().toLocaleString('pl-PL', props.options));
 
     useEffect(()=>{
         const intervalId = setInterval(()=>{
-            setClock(new Date().toLocaleTimeString('pl-PL', props.options));
+            setClock(new Date().toLocaleString('pl-PL', props.options));
         },1000);
         return()=>clearInterval(intervalId);
     },[]);
