@@ -1,5 +1,5 @@
 import React,{ useState, useEffect } from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import { Text, View, StyleSheet, Pressable } from 'react-native';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen'
 
 const SmallClock = (props) =>{
@@ -17,6 +17,7 @@ const SmallClock = (props) =>{
         },1000);
         return()=>clearInterval(intervalId);
     },[]);
+    
     useEffect(()=>{
         const intervalId = setInterval(()=>{
             setData(new Date().toLocaleString('pl-PL', dataOptions));
@@ -25,15 +26,17 @@ const SmallClock = (props) =>{
     },[]);
 
     return(
-        <View style={styles.container}>
-            <View style={styles.dumb}>
-                <Text style={[styles.dataText,{fontSize:hp('2.4%')}]}>{city}</Text>
-                <Text style={styles.dataText}>{data}</Text>
+        <Pressable onPress={props.onPress}>
+            <View style={styles.container}>
+                <View style={styles.dumb}>
+                    <Text style={[styles.dataText,{fontSize:hp('2.4%')}]}>{city}</Text>
+                    <Text style={styles.dataText}>{data}</Text>
+                </View>
+                <View style={styles.clock}>
+                    <Text style={styles.clockText}> {clock}</Text>
+                </View>
             </View>
-            <View style={styles.clock}>
-                <Text style={styles.clockText}> {clock}</Text>
-            </View>
-        </View>
+        </Pressable>
     )
 }
 
@@ -61,12 +64,12 @@ const styles = StyleSheet.create({
         width:'50%',
     },
     clockText:{
-        color:'#9F9F9F',
+        color:'#B1B1B1',
         fontSize:hp('4%'),
         fontWeight:'600'
     },
     dataText:{
-        color:'#A0A0A0',
+        color:'#B1B1B1',
         fontWeight:'600'
     },
 })

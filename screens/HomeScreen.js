@@ -3,7 +3,7 @@ import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-nativ
 import Clock from './components/clock';
 import SmallClock from "./components/smallClocks";
 
-const HomeScreen = () =>{
+const HomeScreen = ({navigation}) =>{
     const mainClockOptions = {hour:'numeric', minute:'numeric', second:'numeric', hour12:false, timeZone:'Europe/Warsaw'};
     const mainDataOptions = {weekday:'long', year:'numeric', month:'long', day:'numeric', timeZone:'Europe/Warsaw'}
     const timeZones = [
@@ -22,7 +22,13 @@ const HomeScreen = () =>{
                 style={styles.list}
                 data={timeZones}
                 renderItem={({item}) => 
-                    <SmallClock timeZone={item} styles={styles.clock} />
+                    <SmallClock 
+                        onPress={() => navigation.navigate('Clock',{
+                            timeZone: item
+                        })}
+                        timeZone={item}
+                        styles={styles.clock}
+                    />
                 }
             />
         </View>
